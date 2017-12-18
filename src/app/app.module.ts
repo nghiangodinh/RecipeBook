@@ -1,18 +1,20 @@
-import { ShoppingListService } from './../services/shopping-list';
-import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
+import { BrowserModule } from "@angular/platform-browser";
+import { ErrorHandler, NgModule } from "@angular/core";
+import { IonicApp, IonicErrorHandler, IonicModule } from "ionic-angular";
+import { SplashScreen } from "@ionic-native/splash-screen";
+import { StatusBar } from "@ionic-native/status-bar";
 
-import { MyApp } from './app.component';
+import { RecipeService } from "./../services/recipe";
+import { ShoppingListService } from "./../services/shopping-list";
+
+import { MyApp } from "./app.component";
 import {
   RecipeEditPage,
   RecipePage,
   RecipesPage,
   ShoppingListPage,
-  TabsPage } from '../pages/pages';
-
+  TabsPage
+} from "../pages/pages";
 
 @NgModule({
   declarations: [
@@ -23,10 +25,7 @@ import {
     ShoppingListPage,
     TabsPage
   ],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp)
-  ],
+  imports: [BrowserModule, IonicModule.forRoot(MyApp)],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -39,8 +38,9 @@ import {
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ShoppingListService
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    ShoppingListService,
+    RecipeService
   ]
 })
 export class AppModule {}
