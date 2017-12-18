@@ -1,3 +1,9 @@
 page-recipe-edit {
-
+  ion-grid {
+    ion-row {
+      &.header {
+        font-weight: bold;
+      }
+    }
+  }
 }

@@ -3,4 +3,13 @@ page-recipe {
     text-transform: uppercase;
     color: #ccc;
   }
+
+  ion-grid {
+    ion-row {
+      &.header {
+        font-weight: bold;
+        border-bottom: 1px solid color($colors, primary);
+      }
+    }
+  }
 }

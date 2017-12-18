@@ -8,13 +8,11 @@
 
 
 <ion-content padding>
-  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" >
+  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
     <ion-list>
       <ion-item>
         <ion-label floating>Title</ion-label>
-        <ion-input
-          type="text"
-          formControlName="title"></ion-input>
+        <ion-input type="text" formControlName="title"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Description</ion-label>
@@ -23,30 +21,28 @@
       <ion-item>
         <ion-label floating>Difficulty</ion-label>
         <ion-select formControlName="difficulty">
-          <ion-option
-            *ngFor="let option of selectOptions"
-            [value]="option">{{ option }}</ion-option>
+          <ion-option *ngFor="let option of selectOptions" [value]="option">{{ option }}</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>
 
-    <button type="button"
-      ion-button
-      block
-      clear
-      (click)="onManageIngredients()">Manage Ingredients</button>
+    <button type="button" ion-button block clear (click)="onManageIngredients()">Manage Ingredients</button>
 
-    <ion-list formArrayName="ingredients">
-      <ion-item *ngFor="let igControl of recipeForm.get('ingredients').controls; let i = index">
-        <ion-label>Name</ion-label>
-        <ion-input type="text" [formControlName]="i"></ion-input>
-      </ion-item>
-    </ion-list>
+    <ion-grid formArrayName="ingredients">
+      <ion-row class="header" *ngIf="recipeForm.get('ingredients').controls.length > 0">
+        <ion-col col-8>Name</ion-col>
+        <ion-col col-4>Amount</ion-col>
+      </ion-row>
+      <ion-row *ngFor="let igControl of recipeForm.get('ingredients').controls; let i = index" [formGroupName]="i">
+        <ion-col col-8>
+          <ion-input type="text" formControlName="name"></ion-input>
+        </ion-col>
+        <ion-col col-4>
+          <ion-input type="number" formControlName="amount" step="1" min="1"></ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
-    <button
-      type="submit"
-      ion-button
-      block
-      [disabled]="!recipeForm.valid">{{ mode }} Recipe</button>
+    <button type="submit" ion-button block [disabled]="!recipeForm.valid">{{ mode }} Recipe</button>
   </form>
 </ion-content>

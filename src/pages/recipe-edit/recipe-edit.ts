@@ -11,6 +11,7 @@ import { FormGroup, FormControl, Validators, FormArray } from "@angular/forms";
 
 import { Recipe } from "./../../models/recipe";
 import { RecipeService } from "../../services/recipe";
+import { Ingredient } from '../../models/ingredient';
 
 @IonicPage()
 @Component({
@@ -18,7 +19,7 @@ import { RecipeService } from "../../services/recipe";
   templateUrl: "recipe-edit.html"
 })
 export class RecipeEditPage implements OnInit {
-  mode: "New";
+  mode = "New";
   selectOptions = ["Easy", "Medium", "Hard"];
   recipeForm: FormGroup;
   recipe: Recipe;
@@ -53,8 +54,10 @@ export class RecipeEditPage implements OnInit {
       title = this.recipe.title;
       description = this.recipe.description;
       difficulty = this.recipe.difficulty;
+
       for (let ingredient of this.recipe.ingredients) {
-        ingredients.push(new FormControl(ingredient.name, Validators.required));
+        const fg = this.createIngredientFormGroup(ingredient)
+        ingredients.push(fg);
       }
     }
 
@@ -66,18 +69,17 @@ export class RecipeEditPage implements OnInit {
     });
   }
 
+  private createIngredientFormGroup(ingredient: Ingredient) {
+    return new FormGroup({
+      name: new FormControl(ingredient.name, Validators.required),
+      amount: new FormControl(ingredient.amount, Validators.required)
+    });
+  }
+
   onSubmit() {
     const value = this.recipeForm.value;
-    let ingredients = [];
 
-    if (value.ingredients.length > 0) {
-      ingredients = value.ingredients.map(name => {
-        return {
-          name,
-          amount: 1
-        };
-      });
-    }
+    console.log(value.ingredients)
 
     if (this.mode === "Edit") {
       this.recipeService.updateRecipe(
@@ -85,14 +87,14 @@ export class RecipeEditPage implements OnInit {
         value.title,
         value.description,
         value.difficulty,
-        ingredients
+        value.ingredients
       );
     } else {
       this.recipeService.addRecipe(
         value.title,
         value.description,
         value.difficulty,
-        ingredients
+        value.ingredients
       );
     }
 
@@ -121,20 +123,19 @@ export class RecipeEditPage implements OnInit {
             for (let i = len - 1; i >= 0; i--) {
               fArray.removeAt(i);
             }
+
             const toast = this.toastCtrl.create({
               message: "All ingredients were deleted!",
               duration: 1000,
               position: "bottom"
             });
+
             toast.present();
           }
         },
         {
           text: "Cancel",
-          role: "cancel",
-          handler: () => {
-            //console.log('Cancel clicked');
-          }
+          role: "cancel"
         }
       ]
     });
@@ -167,9 +168,11 @@ export class RecipeEditPage implements OnInit {
               toast.present();
               return;
             }
+
             (<FormArray>this.recipeForm.get("ingredients")).push(
-              new FormControl(data.name, Validators.required)
+              this.createIngredientFormGroup(new Ingredient(data.name, 1))
             );
+
             const toast = this.toastCtrl.create({
               message: "Item added!",
               duration: 1000,

@@ -22,11 +22,20 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-list>
-          <ion-item *ngFor="let ingredient of recipe.ingredients">
-            {{ ingredient.name }}
-          </ion-item>
-        </ion-list>
+        <ion-grid>
+          <ion-row class="header">
+            <ion-col col-8>Name</ion-col>
+            <ion-col col-4>Amount</ion-col>
+          </ion-row>
+          <ion-row *ngFor="let ingredient of recipe.ingredients">
+            <ion-col col-8>
+                {{ ingredient.name }}
+            </ion-col>
+            <ion-col col-4>
+                {{ ingredient.amount | currency}}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="recipe.ingredients.length > 0">
