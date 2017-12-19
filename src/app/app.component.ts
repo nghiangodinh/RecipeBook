@@ -6,7 +6,7 @@ import { SplashScreen } from "@ionic-native/splash-screen";
 import { TabsPage, SigninPage, SignupPage } from "../pages/pages";
 import { MenuController } from "ionic-angular";
 import firebase from "firebase";
-import { SigninPage } from '../pages/signin/signin';
+
 
 var config = {
   apiKey: "AIzaSyCIpi7ll3mGSJZHGIRQFczH1A14MmfSfNQ",
