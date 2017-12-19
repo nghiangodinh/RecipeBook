@@ -13,6 +13,8 @@ import {
   RecipePage,
   RecipesPage,
   ShoppingListPage,
+  SigninPage,
+  SignupPage,
   TabsPage
 } from "../pages/pages";
 
@@ -23,6 +25,8 @@ import {
     RecipePage,
     RecipesPage,
     ShoppingListPage,
+    SigninPage,
+    SignupPage,
     TabsPage
   ],
   imports: [BrowserModule, IonicModule.forRoot(MyApp)],
