@@ -37,6 +37,8 @@ import {
     RecipePage,
     RecipesPage,
     ShoppingListPage,
+    SigninPage,
+    SignupPage,
     TabsPage
   ],
   providers: [
