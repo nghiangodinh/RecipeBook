@@ -6,8 +6,10 @@ import { StatusBar } from "@ionic-native/status-bar";
 
 import { RecipeService } from "./../services/recipe";
 import { ShoppingListService } from "./../services/shopping-list";
+import { AuthService } from "../services/auth";
 
 import { MyApp } from "./app.component";
+
 import {
   RecipeEditPage,
   RecipePage,
@@ -46,7 +48,8 @@ import {
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     ShoppingListService,
-    RecipeService
+    RecipeService,
+    AuthService
   ]
 })
 export class AppModule {}
