@@ -11,7 +11,6 @@ import {
 
 import { AuthService } from '../../services/auth';
 import { DatabaseOptionsPage, RecipeEditPage, RecipePage } from '../pages';
-import { Ingredient } from '../../models/ingredient';
 import { Recipe } from './../../models/recipe';
 import { RecipeService } from './../../services/recipe';
 

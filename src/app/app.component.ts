@@ -5,7 +5,7 @@ import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { TabsPage, SigninPage, SignupPage } from "../pages/pages";
 import { MenuController } from "ionic-angular";
-import firebase from "firebase";
+import * as firebase from "firebase";
 
 
 var config = {

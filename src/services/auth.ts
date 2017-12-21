@@ -1,4 +1,4 @@
-import firebase from "firebase";
+import * as firebase from "firebase";
 
 export class AuthService {
   signup(email: string, password: string) {
